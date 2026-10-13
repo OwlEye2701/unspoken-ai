@@ -1,0 +1,27 @@
+# Unspoken AI — LLM Context
+
+Unspoken AI is an AI-powered conversation reply assistant for users aged 16 and older.
+
+## What it does
+
+Users upload a chat screenshot or paste conversation text. Unspoken AI analyses the conversation and generates three reply suggestions:
+- Normal: natural and relaxed
+- Rizz: confident and charming
+- Flirty: playful and light
+
+## Architecture
+
+- Next.js 14 (App Router) with TypeScript
+- Supabase Auth for authentication
+- Google Gemini API (server-side only)
+- Tailwind CSS v4
+
+## Privacy
+
+- Screenshots are not stored after processing
+- Ephemeral in-memory analysis only
+- No tracking or analytics
+
+## Age restriction
+
+16+ only. Verified server-side during registration.
