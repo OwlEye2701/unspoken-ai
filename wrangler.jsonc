@@ -11,6 +11,11 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "vars": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://zflzuwzrmylpskxfbvmq.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_s54CvG_kfFHdkvSY7sod8Q_1rhBfTbU",
+    "NEXT_PUBLIC_APP_URL": "https://unspokenai.owleye41.workers.dev"
+  },
   "build": {
     "command": "npm run build"
   }
