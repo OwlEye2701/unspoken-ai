@@ -30,6 +30,12 @@ export async function login(
   const isOwnerUsername = enteredEmail.toLowerCase() === "owleye2" || enteredEmail.toLowerCase() === "owleye2@unspokenai.app";
   const loginEmail = isOwnerUsername ? "owleye2@unspokenai.app" : enteredEmail;
 
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return {
+      error: "Authentication service is not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your Cloudflare Worker environment variables.",
+    };
+  }
+
   const supabase = await createClient();
 
   let { error } = await supabase.auth.signInWithPassword({
@@ -139,6 +145,12 @@ export async function register(
     return {
       error:
         "Unspoken AI is only available for people aged 16 and older. You do not meet the age requirement.",
+    };
+  }
+
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return {
+      error: "Authentication service is not configured. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your Cloudflare Worker environment variables.",
     };
   }
 
