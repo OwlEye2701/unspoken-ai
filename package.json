@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:worker": "opennextjs-cloudflare build",
+    "preview:worker": "opennextjs-cloudflare preview",
+    "deploy:worker": "opennextjs-cloudflare deploy",
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
@@ -27,6 +30,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.10",
     "@tailwindcss/turbopack": "^4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -41,7 +45,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.14",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.150.0"
   },
   "allowScripts": {
     "packages/sharp": true,

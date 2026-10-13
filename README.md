@@ -80,11 +80,37 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### 5. Build for Production
 
 ```bash
+# Standard Next.js production build:
 npm run build
 npm start
+
+# Cloudflare Workers build (via OpenNext):
+npm run build:worker
+
+# Local preview in Cloudflare Workers runtime (via Wrangler):
+npm run preview:worker
 ```
 
 ---
+
+## Cloudflare Workers Deployment
+
+This project uses the official `@opennextjs/cloudflare` adapter to compile Next.js 16 to Cloudflare Workers with static assets and `nodejs_compat`.
+
+### Build & Deploy Commands
+- **Build command:** `npx @opennextjs/cloudflare build` (or `npm run build:worker`)
+- **Deploy command:** `npx @opennextjs/cloudflare deploy` (or `npm run deploy:worker`)
+- **Local preview:** `npm run preview:worker`
+
+### Cloudflare Environment Variables & Secrets
+Configure these in the Cloudflare dashboard (**Workers & Pages → Your Project → Settings → Variables and Secrets**):
+- `NEXT_PUBLIC_SUPABASE_URL` (Encrypted / Plaintext)
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Encrypted / Plaintext)
+- `SUPABASE_SERVICE_ROLE_KEY` (**Secret / Encrypted**)
+- `GEMINI_API_KEY` (**Secret / Encrypted**)
+- `NEXT_PUBLIC_APP_URL` (e.g. `https://unspoken-ai.<subdomain>.workers.dev`)
+- `STRIPE_WEBHOOK_SECRET` / `RAZORPAY_WEBHOOK_SECRET` (**Secret / Encrypted**)
+
 
 ## External Integrations & Setup Guide
 
