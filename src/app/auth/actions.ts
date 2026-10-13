@@ -97,7 +97,11 @@ export async function login(
     }
   }
 
-  revalidatePath("/", "layout");
+  try {
+    revalidatePath("/", "layout");
+  } catch {
+    // Non-fatal if runtime cache tag provider is unavailable in edge worker
+  }
   redirect("/app");
 }
 
@@ -179,7 +183,11 @@ export async function register(
 export async function logout(): Promise<void> {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  revalidatePath("/", "layout");
+  try {
+    revalidatePath("/", "layout");
+  } catch {
+    // Non-fatal if edge worker doesn't support cache revalidation
+  }
   redirect("/");
 }
 
@@ -231,6 +239,10 @@ export async function updatePassword(
     return { error: "Could not update password. The reset link may have expired." };
   }
 
-  revalidatePath("/", "layout");
+  try {
+    revalidatePath("/", "layout");
+  } catch {
+    // Non-fatal
+  }
   redirect("/app");
 }

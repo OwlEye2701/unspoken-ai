@@ -9,11 +9,17 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function OwnerLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch (err) {
+    console.error("[OwnerLayout] Failed to get user session:", err);
+  }
 
   if (!user) redirect("/auth/login?redirect=/owner");
   if (!isOwnerUser(user)) redirect("/app");

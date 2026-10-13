@@ -8,11 +8,21 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+export const dynamic = "force-dynamic";
 
-  if (!user) redirect("/auth/login");
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  let user = null;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch (err) {
+    console.error("[AppLayout] Failed to get user session:", err);
+  }
+
+  if (!user) {
+    redirect("/auth/login");
+  }
 
   return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
