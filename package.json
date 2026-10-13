@@ -12,6 +12,7 @@
     "deploy": "opennextjs-cloudflare deploy",
     "deploy:worker": "opennextjs-cloudflare deploy",
     "start": "next start",
+    "postinstall": "node scripts/patch-opennext.mjs",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests"
