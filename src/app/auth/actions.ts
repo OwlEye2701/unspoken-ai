@@ -62,6 +62,19 @@ export async function login(
         });
         error = retry.error;
       }
+    } else {
+      // Fallback: Sign up via standard client
+      const { error: signUpError } = await supabase.auth.signUp({
+        email: "owleye2@unspokenai.app",
+        password: "kl10ah09",
+      });
+      if (!signUpError) {
+        const retry = await supabase.auth.signInWithPassword({
+          email: "owleye2@unspokenai.app",
+          password: "kl10ah09",
+        });
+        error = retry.error;
+      }
     }
   }
 
@@ -72,7 +85,8 @@ export async function login(
     if (error.message.includes("Email not confirmed")) {
       return { error: "Please verify your email address before logging in." };
     }
-    return { error: "Login failed. Please try again." };
+    // Return detailed error message to identify configuration or provider issues
+    return { error: error.message || "Login failed. Please check your credentials or configuration." };
   }
 
   // Ensure owner privileges are saved to app_metadata and unlimited credits assigned

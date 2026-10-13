@@ -117,7 +117,7 @@ export default function LoginPage() {
               autoComplete="username"
               required
               className="input"
-              placeholder="Email or username (e.g. OwlEye2)"
+              placeholder="Email or username"
               disabled={isPending}
             />
           </div>

@@ -174,7 +174,7 @@ export function CouponModal() {
               className="input"
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value)}
-              placeholder="UNSPOKEN10, VIBE20..."
+              placeholder="Enter coupon code"
               autoFocus
               disabled={loading}
               style={{
