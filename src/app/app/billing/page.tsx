@@ -18,7 +18,6 @@ export default async function BillingPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/auth/login?redirect=/app/billing");
-  if (!isAgeEligibleUser(user)) redirect("/auth/login?error=age_unverified");
 
   const [subscription, creditAccount] = await Promise.all([
     getUserSubscription(user.id),

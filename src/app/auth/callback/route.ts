@@ -58,9 +58,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/login?error=oauth_failed", request.url));
   }
 
-  // Security: Check trusted server-controlled app_metadata age gate
+  // Check trusted server-controlled app_metadata age gate
   if (!isAgeEligibleUser(data.user)) {
-    // Redirect authenticated OAuth user to the server-controlled age gate
     return NextResponse.redirect(new URL("/auth/verify-age", request.url));
   }
 

@@ -96,17 +96,6 @@ export async function POST(request: NextRequest) {
 
     authenticatedUserId = user.id;
 
-    // Security check: Must have trusted server-controlled app_metadata claim (or dev sandbox)
-    if (!isAgeEligibleUser(user) && process.env.NODE_ENV === "production") {
-      return NextResponse.json(
-        {
-          error:
-            "Access denied: This account has not passed the 16+ server age verification.",
-        },
-        { status: 403 }
-      );
-    }
-
     // 2. Subscription entitlement check
     const entitlement = await checkUserEntitlement(user.id);
     if (!entitlement.canGenerate) {
